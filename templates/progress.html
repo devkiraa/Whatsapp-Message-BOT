@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #ffdddd;
+            border: 1px solid #ff8888;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Progress</h1>
+        <p id="progress">Messages Sent: 0 / 0</p>
+        <ul id="failed-messages"></ul>
+        <button class="btn" onclick="goToMainPage()">Go to Main Page</button>
+    </div>
+
+    <script>
+        function fetchProgressStatus() {
+            fetch('/progress_status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('progress').textContent = `Messages Sent: ${data.sent} / ${data.total}`;
+                    const failedMessagesList = document.getElementById('failed-messages');
+                    failedMessagesList.innerHTML = '';
+                    data.failed.forEach(msg => {
+                        const li = document.createElement('li');
+                        li.textContent = msg;
+                        failedMessagesList.appendChild(li);
+                    });
+                });
+        }
+
+        function goToMainPage() {
+            window.location.href = '/';
+        }
+
+        setInterval(fetchProgressStatus, 5000);
+    </script>
+</body>
+</html>
