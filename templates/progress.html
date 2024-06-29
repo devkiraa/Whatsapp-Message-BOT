@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Progress</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
             background-color: #f0f2f5;
             display: flex;
             justify-content: center;
@@ -24,46 +24,20 @@
         }
         h1 {
             color: #333;
+            margin-bottom: 20px;
         }
-        p {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background: #ffdddd;
-            border: 1px solid #ff8888;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            background-color: #4CAF50;
-            border: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .btn:hover {
-            background-color: #45a049;
+        .progress {
+            height: 20px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Progress</h1>
-        <p id="progress">Messages Sent: 0 / 0</p>
-        <ul id="failed-messages"></ul>
-        <button class="btn" onclick="goToMainPage()">Go to Main Page</button>
+        <p id="progress" class="mb-3">Messages Sent: 0 / 0</p>
+        <ul id="failed-messages" class="list-group"></ul>
+        <button class="btn btn-primary mt-3" onclick="goToMainPage()">Go to Main Page</button>
     </div>
 
     <script>
@@ -77,6 +51,7 @@
                     data.failed.forEach(msg => {
                         const li = document.createElement('li');
                         li.textContent = msg;
+                        li.className = 'list-group-item list-group-item-danger';
                         failedMessagesList.appendChild(li);
                     });
                 });
@@ -88,5 +63,8 @@
 
         setInterval(fetchProgressStatus, 5000);
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

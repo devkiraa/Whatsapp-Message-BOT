@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 1200px;
+            height: 80%;
+            padding: 20px;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            width: 50%;
+        }
+        .image-container {
+            background: url('assets/image1.svg') no-repeat center center;
+            background-size: cover;
+            border-radius: 0 10px 10px 0;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-2xl font-bold mb-4">Company Details</h1>
+            <form method="POST" action="{{ url_for('company_details') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.company_name.label(class_="block text-gray-700 text-sm") }}
+                    {{ form.company_name(class_="mt-1 block w-full px-2 py-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.company_address.label(class_="block text-gray-700 text-sm") }}
+                    {{ form.company_address(class_="mt-1 block w-full px-2 py-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.submit(class_="w-full py-2 px-3 bg-indigo-600 text-white font-bold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm") }}
+                </div>
+            </form>
+        </div>
+        <div class="image-container"></div>
+    </div>
+</body>
+</html>
